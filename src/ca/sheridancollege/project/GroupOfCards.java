@@ -17,39 +17,36 @@ import java.util.Collections;
  */
 public class GroupOfCards {
 
-    //The group of cards, stored in an ArrayList
-    private ArrayList<Card> cards;
-    private int size;//the size of the grouping
+    // The group of cards, stored in an ArrayList
+    private final ArrayList<Card> cards;
 
-    public GroupOfCards(int size) {
-        this.size = size;
+    // Group of Cards Object
+    public GroupOfCards() {
+        // Making new ArrayList called cards
+        cards = new ArrayList<>();
     }
 
     /**
-     * A method that will get the group of cards as an ArrayList
-     *
-     * @return the group of cards.
+     * A method that will get the group of cards as an ArrayList and to store multiple cards dynamically
+     * @return the group of cards
      */
     public ArrayList<Card> getCards() {
         return cards;
     }
 
+    // Method to populate the Deck with the suits and rank of a standard 52 card deck
+    public void populateDeck() {
+        // For Loop to produce all possible variations of a card in a deck
+        for (Suit suit : Suit.values()) { // For a String called suit will be assigned an element from suits array
+            for (Rank rank : Rank.values()) { // A string called rank will be assigned an element from ranks array
+                cards.add(new Card(rank, suit)); // Array list cards will add new items from the Card object
+            }
+        }
+    }
+
+    // Shuffle method utilizes the collections to randomly arrange the array list in one line of code instead of using Random
     public void shuffle() {
         Collections.shuffle(cards);
-    }
-
-    /**
-     * @return the size of the group of cards
-     */
-    public int getSize() {
-        return size;
-    }
-
-    /**
-     * @param size the max size for the group of cards
-     */
-    public void setSize(int size) {
-        this.size = size;
     }
 
 }//end class
