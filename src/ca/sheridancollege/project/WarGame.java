@@ -60,7 +60,6 @@ public class WarGame extends Game{
         // Main game loop
 
         while (true) {
-
             boolean continueGame = ui.promptNextTurn(turn);
             if (!continueGame) {
                 ui.showRoundWinner("Exiting the game...");
@@ -70,28 +69,25 @@ public class WarGame extends Game{
             Card userCard = user.playCard();
             Card computerCard = computer.playCard();
             
-            // Put the cards into the 'deck' for temp storage
+            // Put the played cards into the deck, to be taken by the winner.
             deck.getCards().add(userCard);
             deck.getCards().add(computerCard);
 
             ui.showPlayedCards(userCard, computerCard);
 
             int result = comparator.compare(userCard, computerCard);
-
-            if (result > 0) {
-                ui.showRoundWinner("You win this round!");
+            Player winner = (result > 0) ? user : (result < 0) ? computer : null;
+            
+            if (winner != null) {
+                ui.showRoundWinner(winner.getName() + " wins this round!");
                 
-                // Add both the won cards to the bottom of the winner's hand
+                // Add all the won cards to the bottom of the winner's hand
                 user.getDeck().getCards().addAll(0, deck.getCards());
                 
-                userWins++;
-            } else if (result < 0) {
-                ui.showRoundWinner("Computer wins this round!");
-                
-                // Add both the won cards to the bottom of the winner's hand
-                user.getDeck().getCards().addAll(0, deck.getCards());
-                
-                computerWins++;
+                if (result > 0)
+                    userWins++;
+                else
+                    computerWins++;
             } else {
                 ui.showRoundWinner("It's a tie! GOING TO WAR!");
                 Player roundWinner = warResolver.resolveWar(user, computer, deck);
