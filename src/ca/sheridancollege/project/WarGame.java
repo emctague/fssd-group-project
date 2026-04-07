@@ -33,6 +33,7 @@ public class WarGame extends Game{
         this.userWins = 0;
         this.computerWins = 0;
     }
+    
     /**
      * The main game loop where the actual game logic is implemented.
      * Initializes and shuffles the deck, distributes cards to players, and manages the rounds.
@@ -67,9 +68,12 @@ public class WarGame extends Game{
                 ui.showRoundWinner("Exiting the game...");
                 break;
             }
-
+            
             Card userCard = user.playCard();
             Card computerCard = computer.playCard();
+            
+            // Remove all cards from the deck.
+            deck.getCards().clear();
             
             // Put the played cards into the deck, to be taken by the winner.
             deck.getCards().add(userCard);
@@ -84,7 +88,7 @@ public class WarGame extends Game{
                 ui.showRoundWinner(winner.getName() + " wins this round!");
                 
                 // Add all the won cards to the bottom of the winner's hand
-                user.getDeck().getCards().addAll(0, deck.getCards());
+                user.getDeck().getCards().addAll(deck.getCards());
                 
                 if (result > 0)
                     userWins++;
@@ -99,7 +103,7 @@ public class WarGame extends Game{
                     break;
                 } else {                    
                     // all both the won cards to the bottom of the winner's hand
-                    roundWinner.getDeck().getCards().addAll(0, deck.getCards());
+                    roundWinner.getDeck().getCards().addAll(deck.getCards());
                 }
             }
 
