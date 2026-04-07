@@ -69,5 +69,9 @@ public class Player {
     public boolean hasCards() {
         return !deck.getCards().isEmpty();
     }
+    
+    public boolean hasAtLeast(int n) {
+        return deck.getCards().size() >= n;
+    }
 
 }
