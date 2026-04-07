@@ -11,7 +11,7 @@ package ca.sheridancollege.project;
  *
  * @author dancye
  */
-public abstract class Card {
+public class Card {
     //default modifier for child classes
 
     /**
@@ -19,7 +19,28 @@ public abstract class Card {
      *
      * @return a String representation of a card. Could be an UNO card, a regular playing card etc.
      */
+    private final Rank rank; // Rank constant
+    private final Suit suit; // Suit constant
+
+    // Card Object with parameters needed to define the card
+    public Card(Rank rank, Suit suit) {
+        this.rank = rank;
+        this.suit = suit;
+    }
+
+    // Create getters for the two variables but not setters as the variables are final and will be defined
+    public Rank getRank() {
+        return rank;
+    }
+
+    public Suit getSuit() {
+        return suit;
+    }
+
+    // toString method used to display the rank and suit of the Card when displayed in the game
     @Override
-    public abstract String toString();
+    public String toString() {
+        return rank + " of " + suit;
+    }
 
 }

@@ -5,23 +5,26 @@
  */
 package ca.sheridancollege.project;
 
+import java.util.ArrayList;
+
 /**
  * A class that models each Player in the game. Players have an identifier, which should be unique.
  *
  * @author dancye
  * @author Paul Bonenfant Jan 2020
  */
-public abstract class Player {
+public class Player {
 
-    private String name; //the unique name for this player
+    private final String name; // The unique name for this player
+    private final GroupOfCards deck; // The deck of cards held by player
 
     /**
      * A constructor that allows you to set the player's unique ID
-     *
-     * @param name the unique ID to assign to this player.
+     * @param name the unique ID to assign to this player
      */
     public Player(String name) {
         this.name = name;
+        deck = new GroupOfCards(); // Initialize the player's deck
     }
 
     /**
@@ -31,19 +34,44 @@ public abstract class Player {
         return name;
     }
 
-    /**
-     * Ensure that the playerID is unique
-     *
-     * @param name the player name to set
-     */
-    public void setName(String name) {
-        this.name = name;
+    public GroupOfCards getDeck() {
+        return deck;
     }
 
     /**
-     * The method to be overridden when you subclass the Player class with your specific type of Player and filled in
-     * with logic to play your game.
+     * Draws a card from source deck and adds it to the player's deck
+     * @param source the source deck from which to draw the card
      */
-    public abstract void play();
+
+    public void drawCard(GroupOfCards source) {
+        // Check if the source deck is empty
+        if (source.getCards().isEmpty()) {
+            return; // If the source deck is empty, do nothing and exit the method
+        }
+
+        // Draw a card from the source deck and add it to the player's deck
+        ArrayList<Card> playerDeck = deck.getCards();
+        playerDeck.add(source.getCards().remove(0));
+    }
+    
+    /**
+     * Plays a card from the player's deck
+     * @return
+     */
+    public Card playCard() {    
+        if (!hasCards()) {
+            return null;
+        }
+        return deck.getCards().remove(0); // Remove and return the top card from player's deck
+    }
+    
+    
+    public boolean hasCards() {
+        return !deck.getCards().isEmpty();
+    }
+    
+    public boolean hasAtLeast(int n) {
+        return deck.getCards().size() >= n;
+    }
 
 }
