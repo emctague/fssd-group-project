@@ -18,7 +18,7 @@ public class WarResolver {
     }
 
     
-    public Player resolveWar(Player user, Player computer) {
+    public Player resolveWar(Player user, Player computer, GroupOfCards drawnCards) {
 
         ui.showTieStart();
 
@@ -28,15 +28,20 @@ public class WarResolver {
             return null;
         }
 
-        // 2 cards face-down (burn cards)
+        // Draw an additional face-down card.
+        // According to https://bicyclecards.com/how-to-play/war, the original
+        // tying cards count as the first set, so we only need to draw one
+        // additional card per player.
         Card userDown1 = user.playCard();
-        Card userDown2 = user.playCard();
         Card compDown1 = computer.playCard();
-        Card compDown2 = computer.playCard();
+        drawnCards.getCards().add(userDown1);
+        drawnCards.getCards().add(compDown1);
 
         // 3rd card face-up
         Card userUp = user.playCard();
         Card compUp = computer.playCard();
+        drawnCards.getCards().add(userUp);
+        drawnCards.getCards().add(compUp);
 
         // Defensive (shouldn't happen because hasAtLeast(3), but safe)
         if (userUp == null || compUp == null) {
@@ -58,7 +63,7 @@ public class WarResolver {
             return computer;
         } else {
             ui.showRoundWinner("WAR tied again! Continuing...");
-            return resolveWar(user, computer); // repeat 2-down + 1-up
+            return resolveWar(user, computer, drawnCards); // repeat 2-down + 1-up
         }
     }
 

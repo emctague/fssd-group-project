@@ -41,6 +41,7 @@ public class WarGame extends Game{
         GroupOfCards deck = new GroupOfCards();
         deck.populateDeck();
         deck.shuffle();
+        
         // Get the list of players (user and computer)
         ArrayList<Player> players = super.getPlayers();
         Player user = players.get(0);
@@ -68,6 +69,10 @@ public class WarGame extends Game{
 
             Card userCard = user.playCard();
             Card computerCard = computer.playCard();
+            
+            // Put the cards into the 'deck' for temp storage
+            deck.getCards().add(userCard);
+            deck.getCards().add(computerCard);
 
             ui.showPlayedCards(userCard, computerCard);
 
@@ -75,21 +80,28 @@ public class WarGame extends Game{
 
             if (result > 0) {
                 ui.showRoundWinner("You win this round!");
-                user.drawCard(deck);
+                
+                // Add both the won cards to the bottom of the winner's hand
+                user.getDeck().getCards().addAll(0, deck.getCards());
+                
                 userWins++;
             } else if (result < 0) {
                 ui.showRoundWinner("Computer wins this round!");
-                computer.drawCard(deck);
+                
+                // Add both the won cards to the bottom of the winner's hand
+                user.getDeck().getCards().addAll(0, deck.getCards());
+                
                 computerWins++;
             } else {
                 ui.showRoundWinner("It's a tie! GOING TO WAR!");
-                Player roundWinner = warResolver.resolveWar(user, computer);
+                Player roundWinner = warResolver.resolveWar(user, computer, deck);
 
                 if (roundWinner == null) {
                     ui.showRoundWinner("No winner in the war. Game over.");
                     break;
-                } else {
-                    roundWinner.drawCard(deck);
+                } else {                    
+                    // all both the won cards to the bottom of the winner's hand
+                    roundWinner.getDeck().getCards().addAll(0, deck.getCards());
                 }
             }
 
@@ -114,4 +126,5 @@ public class WarGame extends Game{
     public void declareWinner() {
         ui.showGameOver(userWins, computerWins);
     }  
+    
 }

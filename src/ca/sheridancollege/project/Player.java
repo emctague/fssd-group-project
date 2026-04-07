@@ -53,7 +53,7 @@ public class Player {
         ArrayList<Card> playerDeck = deck.getCards();
         playerDeck.add(source.getCards().remove(0));
     }
-
+    
     /**
      * Plays a card from the player's deck
      * @return
