@@ -1,12 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ca.sheridancollege.project;
 
 /**
- *
+ * Handles a 'war' scenario in the game of war.
+ * 
  * @author munoj
+ * @author mctaguee
  */
 public class WarResolver {
     private final WarGameUI ui;
@@ -19,7 +17,6 @@ public class WarResolver {
 
     
     public Player resolveWar(Player user, Player computer, GroupOfCards drawnCards) {
-
         ui.showTieStart();
 
         // Need 3 cards each: 2 face-down + 1 face-up

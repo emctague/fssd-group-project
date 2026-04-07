@@ -1,17 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ca.sheridancollege.project;
 
 /**
- *
+ * WarGameAppp
+ * 
+ * Main entry point for an app that plays the card game War.
+ * 
  * @author munoj
  */
 public class WarGameApp {
     public static void main(String[] args) {
         InputProvider input = new ConsoleInputProvider();
-        WarGameUI ui = new WarGameUI(input);
+        ConsoleWarGameUI ui = new ConsoleWarGameUI(input);
         ui.showWelcome();
 
         String userName = ui.askPlayerName();

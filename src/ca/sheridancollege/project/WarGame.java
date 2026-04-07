@@ -1,14 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ca.sheridancollege.project;
 
 import java.util.ArrayList;
 
 /**
- *
+ * WarGame
+ * 
+ * Implements the card game War.
+ * 
  * @author munoj
+ * @author mctaguee
  */
 public class WarGame extends Game{
     // Variables to track the number of wins for the user and the computer
@@ -22,6 +22,8 @@ public class WarGame extends Game{
      * Constructor to initialize the WarGame with a given name.
      * Initializes win counters for both players.
      * @param name The name of the game.
+     * @param ui The user interface for the game of war.
+     * @param comparator Used to compare the score / value of two cards.
      */
     public WarGame(String name, WarGameUI ui, CardComparator comparator) {
         super(name);

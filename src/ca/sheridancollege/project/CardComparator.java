@@ -1,11 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package ca.sheridancollege.project;
 
 /**
- *
+ * CardComparator
+ * 
+ * Provides a comparison between two cards according to some rule.
  * @author munoj
  */
 public interface CardComparator {
